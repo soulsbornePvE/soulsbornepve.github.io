@@ -1,0 +1,1093 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bloodborne — The Best PvE Build</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700;900&family=Cinzel:wght@400;600;700&family=IM+Fell+English:ital@0;1&family=Crimson+Pro:ital,wght@0,300;0,400;0,600;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  --blood: #8b1a1a;
+  --blood-dark: #5a0d0d;
+  --blood-bright: #c0392b;
+  --gold: #c9a84c;
+  --gold-dim: #8a6e32;
+  --ivory: #e8dfc8;
+  --ivory-dim: #b8aa8a;
+  --dark: #0c0a07;
+  --dark-panel: #131108;
+  --border: rgba(201,168,76,0.18);
+  --green: #4a7c5a;
+  --green-bright: #6ab584;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  background: var(--dark);
+  color: var(--ivory);
+  font-family: 'Crimson Pro', Georgia, serif;
+  font-size: 16.5px;
+  line-height: 1.72;
+}
+body::before {
+  content: '';
+  position: fixed; inset: 0;
+  background:
+    radial-gradient(ellipse 80% 55% at 50% -5%, rgba(139,26,26,0.2) 0%, transparent 60%),
+    radial-gradient(ellipse 40% 30% at 85% 95%, rgba(90,13,13,0.1) 0%, transparent 50%);
+  pointer-events: none; z-index: 0;
+}
+
+.wrapper { position: relative; z-index: 1; max-width: 960px; margin: 0 auto; padding: 0 24px 100px; }
+
+/* ── HEADER ── */
+header {
+  text-align: center;
+  padding: 64px 0 52px;
+  position: relative;
+}
+header::before {
+  content: '';
+  display: block;
+  width: 1px; height: 56px;
+  background: linear-gradient(to bottom, transparent, rgba(201,168,76,0.5));
+  margin: 0 auto 22px;
+}
+.eyebrow {
+  font-family: 'Cinzel', serif;
+  font-size: 10px; letter-spacing: 0.45em; text-transform: uppercase;
+  color: var(--gold-dim); margin-bottom: 16px;
+}
+h1 {
+  font-family: 'Cinzel Decorative', serif;
+  font-size: clamp(2.2rem, 5.5vw, 4rem);
+  color: var(--ivory);
+  text-shadow: 0 0 60px rgba(139,26,26,0.7), 0 2px 8px rgba(0,0,0,0.9);
+  line-height: 1.05;
+  margin-bottom: 14px;
+}
+h1 em { color: var(--blood-bright); font-style: normal; text-shadow: 0 0 40px rgba(192,57,43,0.6); }
+.tagline {
+  font-family: 'IM Fell English', serif;
+  font-style: italic; color: var(--ivory-dim); font-size: 1.1rem;
+  margin-bottom: 32px;
+}
+.badges { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; }
+.badge {
+  font-family: 'Cinzel', serif; font-size: 9.5px; letter-spacing: 0.25em; text-transform: uppercase;
+  border: 1px solid var(--border); padding: 5px 14px; color: var(--gold-dim);
+}
+
+/* ── NAV ── */
+.nav {
+  display: flex; flex-wrap: wrap; gap: 2px;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 44px; margin-top: 36px;
+}
+.nav-btn {
+  font-family: 'Cinzel', serif; font-size: 10.5px; letter-spacing: 0.18em; text-transform: uppercase;
+  color: var(--ivory-dim); background: none; border: none;
+  border-bottom: 2px solid transparent; padding: 10px 16px;
+  cursor: pointer; transition: color 0.18s; margin-bottom: -1px;
+}
+.nav-btn:hover { color: var(--ivory); }
+.nav-btn.active { color: var(--gold); border-bottom-color: var(--gold); }
+.tab { display: none; animation: fadeUp 0.28s ease; }
+.tab.active { display: block; }
+@keyframes fadeUp { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+
+/* ── TYPE ── */
+h2 {
+  font-family: 'Cinzel', serif; font-size: 1.45rem; color: var(--gold);
+  margin: 0 0 22px; padding-bottom: 12px; border-bottom: 1px solid var(--border);
+  letter-spacing: 0.04em;
+}
+h3 { font-family: 'Cinzel', serif; font-size: 1.05rem; color: var(--ivory); margin: 32px 0 11px; }
+h4 {
+  font-family: 'Cinzel', serif; font-size: 0.85rem; color: var(--gold-dim);
+  letter-spacing: 0.12em; text-transform: uppercase; margin: 20px 0 8px;
+}
+p { margin-bottom: 13px; }
+strong { color: var(--ivory); font-weight: 600; }
+em { color: var(--gold-dim); font-style: italic; }
+ul, ol { padding-left: 20px; margin-bottom: 13px; }
+li { margin-bottom: 6px; }
+a { color: var(--gold); text-decoration: none; }
+a:hover { text-decoration: underline; color: var(--gold-dim); }
+
+/* ── CALLOUTS ── */
+.callout {
+  border-left: 3px solid var(--gold-dim);
+  background: rgba(201,168,76,0.06);
+  padding: 13px 17px; margin: 18px 0; font-size: 0.93rem;
+}
+.callout.warn { border-color: var(--blood-bright); background: rgba(139,26,26,0.09); }
+.callout.good { border-color: var(--green); background: rgba(74,124,90,0.09); }
+.callout.info { border-color: #5ba8c4; background: rgba(91,168,196,0.07); }
+.cl { font-family: 'Cinzel', serif; font-size: 9px; letter-spacing: 0.3em; text-transform: uppercase; opacity: 0.6; display: block; margin-bottom: 5px; }
+
+/* ── STAT CARD ── */
+.stat-card {
+  background: var(--dark-panel);
+  border: 1px solid rgba(139,26,26,0.4);
+  padding: 20px 24px;
+  margin: 18px 0;
+}
+.stat-card-title {
+  font-family: 'Cinzel Decorative', serif; font-size: 0.88rem;
+  color: var(--gold); margin-bottom: 14px; letter-spacing: 0.05em;
+}
+.stat-spread {
+  font-family: monospace; font-size: 1.3rem; letter-spacing: 0.08em;
+  color: var(--ivory); margin: 8px 0 4px;
+}
+.stat-labels {
+  font-family: 'Cinzel', serif; font-size: 9px; letter-spacing: 0.25em;
+  color: var(--gold-dim); text-transform: uppercase;
+}
+
+/* ── TABLES ── */
+.tw { overflow-x: auto; margin: 16px 0; }
+table { width: 100%; border-collapse: collapse; font-size: 0.875rem; }
+thead tr { background: var(--blood-dark); }
+th {
+  font-family: 'Cinzel', serif; font-size: 9px; letter-spacing: 0.18em; text-transform: uppercase;
+  color: var(--gold-dim); padding: 9px 11px; text-align: left;
+  border-bottom: 1px solid var(--border); white-space: nowrap;
+}
+td { padding: 8px 11px; border-bottom: 1px solid rgba(201,168,76,0.07); vertical-align: top; }
+tr:nth-child(even) td { background: rgba(255,255,255,0.02); }
+tr:hover td { background: rgba(201,168,76,0.04); }
+.n { font-family: monospace; font-size: 0.84rem; color: var(--ivory-dim); }
+.hi { color: #e74c3c; font-weight: 700; }
+.mid { color: #e67e22; font-weight: 600; }
+.lo { color: var(--ivory-dim); }
+.good-val { color: var(--green-bright); font-weight: 600; }
+
+/* ── GLYPH ── */
+.g {
+  font-family: monospace;
+  background: rgba(139,26,26,0.28); border: 1px solid rgba(139,26,26,0.5);
+  padding: 1px 7px; font-size: 0.84em; color: #e99; letter-spacing: 0.04em; white-space: nowrap;
+  display: inline-block;
+}
+
+/* ── GRID ── */
+.two { display: grid; grid-template-columns: 1fr 1fr; gap: 22px; margin: 14px 0; }
+.three { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; margin: 14px 0; }
+@media (max-width: 700px) { .two, .three { grid-template-columns: 1fr; } }
+
+/* ── MINI CARDS ── */
+.card {
+  background: var(--dark-panel); border: 1px solid var(--border);
+  padding: 16px 18px; transition: border-color 0.18s;
+}
+.card:hover { border-color: var(--gold-dim); }
+.card-t { font-family: 'Cinzel', serif; font-size: 0.9rem; color: var(--gold); margin-bottom: 7px; }
+.card-b { font-size: 0.88rem; color: var(--ivory-dim); line-height: 1.6; }
+.tag {
+  display: inline-block; font-family: 'Cinzel', serif; font-size: 8.5px;
+  letter-spacing: 0.22em; text-transform: uppercase; padding: 2px 7px;
+  border: 1px solid; margin-bottom: 8px;
+}
+.t-w { color: var(--gold); border-color: var(--gold-dim); }
+.t-s { color: var(--green-bright); border-color: var(--green); }
+.t-g { color: #b89fd8; border-color: #7a5fa0; }
+.t-r { color: #7ac4dc; border-color: #4a8aa0; }
+.t-b { color: #e99; border-color: var(--blood); }
+.t-o { color: #999; border-color: #444; }
+
+/* ── STEP LIST ── */
+.steps { counter-reset: s; list-style: none; padding: 0; }
+.steps li {
+  counter-increment: s;
+  display: flex; gap: 14px; padding: 12px 0;
+  border-bottom: 1px solid rgba(201,168,76,0.07);
+}
+.steps li::before {
+  content: counter(s);
+  font-family: 'Cinzel', serif; font-size: 11px; color: var(--gold);
+  border: 1px solid var(--gold-dim); padding: 2px 8px;
+  flex-shrink: 0; height: fit-content; margin-top: 3px; min-width: 30px; text-align: center;
+}
+.steps li strong { display: block; margin-bottom: 3px; }
+
+/* ── WEAPON STAGE ── */
+.weapon-stage {
+  border: 1px solid var(--border); margin-bottom: 20px;
+  background: var(--dark-panel);
+}
+.ws-head {
+  display: flex; align-items: center; gap: 16px;
+  padding: 14px 20px 12px; border-bottom: 1px solid var(--border);
+}
+.ws-num {
+  font-family: 'Cinzel Decorative', serif; font-size: 0.72rem;
+  color: var(--blood-bright); border: 1px solid var(--blood-dark);
+  padding: 3px 9px; flex-shrink: 0;
+}
+.ws-title { font-family: 'Cinzel', serif; font-size: 1rem; color: var(--gold); flex: 1; }
+.ws-when { font-family: 'IM Fell English', serif; font-style: italic; font-size: 0.87rem; color: var(--ivory-dim); }
+.ws-body { padding: 16px 20px; }
+
+/* ── BOSS TABLE ── */
+.boss-weak { color: var(--green-bright); font-weight: 700; }
+.boss-immune { color: #c0392b; font-weight: 700; }
+.boss-neutral { color: var(--ivory-dim); }
+
+/* ── DIVIDER ── */
+.divider {
+  display: flex; align-items: center; gap: 14px;
+  margin: 36px 0 28px;
+}
+.divider::before, .divider::after {
+  content: ''; flex: 1; height: 1px;
+  background: linear-gradient(to right, transparent, var(--border), transparent);
+}
+.divider span { color: var(--gold-dim); font-size: 1rem; opacity: 0.5; }
+
+footer {
+  text-align: center; padding: 36px 0 16px;
+  border-top: 1px solid var(--border);
+  font-family: 'Cinzel', serif; font-size: 9px; letter-spacing: 0.2em;
+  color: var(--ivory-dim); opacity: 0.35; text-transform: uppercase;
+}
+</style>
+</head>
+<body>
+<div class="wrapper">
+
+<header>
+  <div class="eyebrow">Community Research · Data Analysis · Definitive Guide</div>
+  <h1>The Best<br><em>Bloodborne</em><br>PvE Build</h1>
+  <div class="tagline">Everything you need. Nothing you don't.</div>
+  <div class="badges">
+    <div class="badge">Game Version 1.09</div>
+    <div class="badge">Strength / Quality</div>
+    <div class="badge">Whirligig Saw</div>
+    <div class="badge">BL ~120</div>
+  </div>
+</header>
+
+<nav class="nav">
+  <button class="nav-btn active" onclick="show('overview',this)">Overview</button>
+  <button class="nav-btn" onclick="show('weapons',this)">Weapons</button>
+  <button class="nav-btn" onclick="show('stats',this)">Stats</button>
+  <button class="nav-btn" onclick="show('glyphs',this)">Glyphs</button>
+  <button class="nav-btn" onclick="show('gems',this)">Gems</button>
+  <button class="nav-btn" onclick="show('runes',this)">Runes</button>
+  <button class="nav-btn" onclick="show('bosses',this)">Bosses</button>
+  <button class="nav-btn" onclick="show('why',this)">Why This Build</button>
+</nav>
+
+<!-- ════════════════════════════════════════════
+     OVERVIEW
+════════════════════════════════════════════ -->
+<div class="tab active" id="tab-overview">
+  <h2>The Build at a Glance</h2>
+
+  <div class="stat-card">
+    <div class="stat-card-title">Final Build — Waste of Skin · Blood Level ~120</div>
+    <div class="stat-spread">50 / 12 / 50 / 25 / 7 / 15</div>
+    <div class="stat-labels">VIT &nbsp;·&nbsp; END &nbsp;·&nbsp; STR &nbsp;·&nbsp; SKL &nbsp;·&nbsp; BLT &nbsp;·&nbsp; ARC</div>
+  </div>
+
+  <div class="three">
+    <div class="card">
+      <div class="tag t-w">Primary Weapon</div>
+      <div class="card-t">Whirligig Saw +10</div>
+      <div class="card-b">Standard variant (no Uncanny/Lost available in community glyphs). Slots: Radial · Triangle · Waning.</div>
+    </div>
+    <div class="card">
+      <div class="tag t-w">Secondary Weapon</div>
+      <div class="card-t">Uncanny Saw Spear +10</div>
+      <div class="card-b">Glyph <span class="g">7hqg2h9a</span>. Radial · Radial · Triangle slots. Keep this forever — use it when the Whirligig spin isn't the right tool.</div>
+    </div>
+    <div class="card">
+      <div class="tag t-w">Firearm</div>
+      <div class="card-t">Hunter Pistol</div>
+      <div class="card-b">Best parry tool. Single reliable shot. No gem investment needed — it's a parry tool, not a damage source.</div>
+    </div>
+    <div class="card">
+      <div class="tag t-g">Gems</div>
+      <div class="card-t">Adept Blunt 32.6% × 3</div>
+      <div class="card-b">Or 27.2% Tempering × 3 if you use both modes equally. See Gems tab for full explanation.</div>
+    </div>
+    <div class="card">
+      <div class="tag t-r">Runes</div>
+      <div class="card-t">Moon · CW Meta +15% · CW Meta +10% · Lake +7%</div>
+      <div class="card-b">HP sustain from kills, +25% max HP from runes, +7% physical damage reduction.</div>
+    </div>
+    <div class="card">
+      <div class="tag t-o">Armor</div>
+      <div class="card-t">Black Church Garb or Harrowed Garb</div>
+      <div class="card-b">Armor differences are small. Black Church: best Frenzy resistance. Harrowed: best physical defense. Pick what you like.</div>
+    </div>
+  </div>
+
+  <h3>The Honest Summary</h3>
+  <p>This build wins in PvE for one reason above all others: <strong>the Whirligig Saw's transformed spin deals ~2,400 damage per second</strong> when you have an opening, compared to ~660 DPS for most other weapons on their best attacks. When bosses commit to long animations, the spin ends the fight.</p>
+  <p>When bosses are aggressive and you can only land one hit before dodging, the Saw Spear's fast R1 and quick recovery is the right tool. The two weapons together cover every situation in the game.</p>
+  <p>The Chikage (Bloodtinge build) has higher single-hit AR on paper, but it drains your HP in transformed mode, has poor rally, and requires 50 Bloodtinge that helps nothing else. In long PvE boss fights, that's a losing trade. The Whirligig wins on sustained encounters and the Saw Spear covers aggressive ones.</p>
+
+  <div class="callout good">
+    <span class="cl">Use This Guide With</span>
+    <a href="https://modo-lv.github.io/bloodborne-checklist/" target="_blank">modo-lv's Bloodborne Checklist</a> handles your full area walkthrough and NPC questlines. This guide tells you the build — what to prioritize, when to get it, and why.
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════════
+     WEAPONS
+════════════════════════════════════════════ -->
+<div class="tab" id="tab-weapons">
+  <h2>Weapons — What to Use & When</h2>
+
+  <div class="weapon-stage">
+    <div class="ws-head">
+      <div class="ws-num">1</div>
+      <div class="ws-title">Saw Cleaver → Saw Spear — Early Game</div>
+      <div class="ws-when">Character creation → Blood-Starved Beast</div>
+    </div>
+    <div class="ws-body">
+      <p>Start with the <strong>Saw Cleaver</strong> (starting weapon) — it deals 20% bonus damage vs beasts in transformed mode, which helps against early beast-type enemies and the first boss.</p>
+      <p>Pick up the <strong>Saw Spear</strong> in Central Yharnam as soon as possible. It becomes your main weapon through the entire early and mid game.</p>
+      <div class="callout info">
+        <span class="cl">Exact Location — Saw Spear</span>
+        From the Central Yharnam lamp, head toward the sewers beneath the plaza area. The Saw Spear is on a corpse in the sewer area near the shortcut gate leading back toward the aqueduct. It is also available to buy from the Bath Messenger in Hunter's Dream after getting the <strong>Saw Hunter Badge</strong> — found in those same sewers on a corpse near the gate.
+      </div>
+      <div class="two">
+        <div>
+          <h4>Why Saw Spear over Saw Cleaver?</h4>
+          <ul>
+            <li>Slightly better Skill scaling (0.63 vs 0.40)</li>
+            <li>Thrust damage in transformed mode — effective vs Kin enemies</li>
+            <li>Can be converted to elemental if you ever try an arcane build later</li>
+            <li>Same serrated beast bonus in normal mode</li>
+          </ul>
+        </div>
+        <div>
+          <h4>Upgrade Priority</h4>
+          <ul>
+            <li>+1 to +3: Bloodstone Shards (Central Yharnam)</li>
+            <li>+4 to +6: Twin Bloodstone Shards (Cathedral Ward)</li>
+            <li>+7 to +9: Blood Stone Chunks (late game/chalice farm)</li>
+            <li>+10: Blood Rock (one per playthrough or glyph <span class="g">aecve32n</span>)</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="weapon-stage">
+    <div class="ws-head">
+      <div class="ws-num">2</div>
+      <div class="ws-title">Uncanny Saw Spear — Get This ASAP</div>
+      <div class="ws-when">After Father Gascoigne (first available chalice)</div>
+    </div>
+    <div class="ws-body">
+      <p>Your starting Saw Spear has <strong>Radial · Radial · Waning</strong> slots. This is bad — your best physical gems are Radial and Triangle, never Waning. The Uncanny Saw Spear has <strong>Radial · Radial · Triangle</strong> slots and is identical in every other way.</p>
+      <div class="callout warn">
+        <span class="cl">Do This Immediately After Gascoigne</span>
+        Glyph <span class="g">7hqg2h9a</span> — Central Pthumeru Root Chalice, Layer 1 first bonus room. You need the Central Pthumeru Root Chalice which requires completing the first Pthumeru dungeon (unlocked from Gascoigne's boss room drop). This is the single most impactful early upgrade you can make.
+      </div>
+      <h4>How to Use the Glyph</h4>
+      <ol class="steps">
+        <li><strong>Defeat Father Gascoigne</strong> and pick up the Pthumeru Chalice from his boss room.</li>
+        <li><strong>Go to the Ritual Altar</strong> in Hunter's Dream (back of the dream near the gravestones). Create the Pthumeru Chalice dungeon and complete it. The first boss drops the Central Pthumeru Chalice.</li>
+        <li><strong>Create the Central Pthumeru Root Chalice</strong> at the Ritual Altar. Then select "Search by Glyph" and type <span class="g">7hqg2h9a</span>.</li>
+        <li><strong>Enter the dungeon</strong> from the lamp in Hunter's Dream. Go to Layer 1 first bonus room and collect the Uncanny Saw Spear.</li>
+        <li><strong>Transfer your gems</strong> from your old Saw Spear to the Uncanny version. Discard the old one.</li>
+      </ol>
+    </div>
+  </div>
+
+  <div class="weapon-stage">
+    <div class="ws-head">
+      <div class="ws-num">3</div>
+      <div class="ws-title">Whirligig Saw — The Main Event</div>
+      <div class="ws-when">Old Hunters DLC — earliest access after Vicar Amelia</div>
+    </div>
+    <div class="ws-body">
+      <p>The best PvE weapon in the game. The transformed spin deals continuous blunt damage at ~3.5 hits per second, staggers most enemies through their attacks, and each tick restores rally HP. Nothing else compares for sustained damage during boss openings.</p>
+      <div class="callout info">
+        <span class="cl">How to Access the DLC</span>
+        Defeat <strong>Vicar Amelia</strong> in Cathedral Ward. Then go to Hunter's Dream — a messenger bath near the stairs will have the <strong>Eye of a Blood-drunk Hunter</strong> item. Pick it up and use it from your inventory. You'll be transported to the Hunter's Nightmare lamp. This is the DLC entrance.
+      </div>
+      <div class="callout info">
+        <span class="cl">Exact Location — Whirligig Saw</span>
+        From the Hunter's Nightmare lamp, proceed into the area through the river of blood section and up into a large building. The Whirligig Saw is on a corpse on a ledge in the early section of Hunter's Nightmare — before the first mini-boss encounter. You cannot realistically miss it by exploring normally. Requires <strong>18 STR / 12 SKL</strong> minimum.
+      </div>
+      <div class="two">
+        <div>
+          <h4>How to Use It</h4>
+          <ul>
+            <li><strong>Normal R1:</strong> Fast physical/blunt hits for quick enemies or tight spaces</li>
+            <li><strong>Transformed spin (hold L2):</strong> Continuous blunt damage. This is your primary tool on bosses with openings. Drains stamina — release when low, recover, spin again.</li>
+            <li><strong>Transformed charged R2:</strong> Massive single hit after a stagger or parry visceral. 1.5–2.0× multiplier.</li>
+            <li><strong>Spin uses stamina, NOT bullets</strong></li>
+          </ul>
+        </div>
+        <div>
+          <h4>When NOT to Spin</h4>
+          <ul>
+            <li>Aggressive bosses with tiny windows — use normal R1 or swap to Saw Spear</li>
+            <li>Tight indoor spaces — the spin can clip on walls and deal no damage</li>
+            <li>Enemies that require precise targeting — the spin hits everything around you</li>
+            <li>When you only have stamina for one hit — a single normal R1 is more reliable</li>
+          </ul>
+        </div>
+      </div>
+      <div class="callout warn">
+        <span class="cl">No Uncanny / Lost Version Needed</span>
+        Unlike the Saw Spear, there is no widely documented Uncanny or Lost Whirligig Saw in community glyph databases. The standard version is what you use. Its Radial · Triangle · Waning slots work fine — fill Radial and Triangle with your best gems, and put a Droplet or Waning gem in the last slot.
+      </div>
+    </div>
+  </div>
+
+  <div class="weapon-stage">
+    <div class="ws-head">
+      <div class="ws-num">4</div>
+      <div class="ws-title">Uncanny Saw Spear — Keep This Forever</div>
+      <div class="ws-when">Permanently in your second weapon slot</div>
+    </div>
+    <div class="ws-body">
+      <p>Even after you get the Whirligig Saw, the Uncanny Saw Spear stays in slot 2 permanently. It covers situations where the Whirligig is the wrong tool:</p>
+      <div class="tw">
+        <table>
+          <thead><tr><th>Situation</th><th>Use</th><th>Why</th></tr></thead>
+          <tbody>
+            <tr><td>Aggressive bosses, tiny windows</td><td><strong>Saw Spear R1</strong></td><td>Faster recovery than Whirligig — you can dodge sooner after the hit</td></tr>
+            <tr><td>Beast-type enemies</td><td><strong>Saw Spear normal mode</strong></td><td>Serrated bonus = 20% extra damage vs beasts</td></tr>
+            <tr><td>Kin enemies (Rom, Ebrietas, etc.)</td><td><strong>Saw Spear transformed thrust</strong></td><td>Thrust damage hits Kin weakness, especially Ebrietas (DEF 101 thrust vs 252 physical)</td></tr>
+            <tr><td>Tight spaces</td><td><strong>Saw Spear</strong></td><td>Whirligig spin clips walls and deals zero damage</td></tr>
+            <tr><td>Parry setups</td><td><strong>Saw Spear</strong></td><td>Lighter moveset, easier to land a hit then immediately go for the parry</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <h3>Situational Weapons Worth Keeping</h3>
+  <div class="tw">
+    <table>
+      <thead><tr><th>Weapon</th><th>Use It For</th><th>Where to Get</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Tonitrus</strong></td><td>Rom, The One Reborn, Celestial Emissary — innate bolt destroys Kin. Rom has bolt DEF of 45 vs 130 physical.</td><td>Treasure in Yahar'gul / buy from Bath Messenger after Spark Hunter Badge (defeat Darkbeast Paarl)</td></tr>
+        <tr><td><strong>Hunter Axe</strong></td><td>When you need maximum rally recovery per hit — highest rally of any weapon</td><td>Starting weapon or Bath Messenger after Saw Hunter Badge</td></tr>
+        <tr><td><strong>Church Pick</strong></td><td>Beast-heavy areas — 1.2× beasthunter multiplier + righteous + thrust damage</td><td>Drops from a Yahar'gul Hunter NPC / DLC area</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════════
+     STATS
+════════════════════════════════════════════ -->
+<div class="tab" id="tab-stats">
+  <h2>Stats — Leveling Order & Targets</h2>
+
+  <div class="callout warn">
+    <span class="cl">The Most Important Rule</span>
+    Never invest more than 12–15 points in Endurance. Community testing proved that from 9 END to 99 END on the Saw Spear you gain exactly <strong>4 extra swings total</strong> — zero gains from 39 to 99. Use Anti-Clockwise Metamorphosis runes instead. Those points are worth far more in Vitality or Strength.
+  </div>
+
+  <h3>Origin: Always Waste of Skin</h3>
+  <p>Waste of Skin starts at Blood Level 4 — six levels lower than every other origin. That's six free extra levels. The only downside is starting with almost no Blood Echoes, which doesn't matter at all past the first few minutes.</p>
+
+  <h3>Leveling Order</h3>
+  <div class="tw">
+    <table>
+      <thead><tr><th>Phase</th><th>Target Stats</th><th>Why</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Character creation → BSB</strong></td><td>VIT 20, STR 18</td><td>18 STR meets Whirligig's minimum requirement. 20 VIT = 793 HP, survivable for early areas.</td></tr>
+        <tr><td><strong>Cathedral Ward → Vicar Amelia</strong></td><td>VIT 30, STR 25</td><td>30 VIT is the first soft cap (~1,100 HP). With HP rune ~1,375 HP.</td></tr>
+        <tr><td><strong>DLC entry (after Amelia)</strong></td><td>STR 35–40</td><td>You now have the Whirligig — push STR hard, it has a 1.1 coefficient.</td></tr>
+        <tr><td><strong>Mid–Late game</strong></td><td>VIT 50, STR 50</td><td>50 VIT is the second soft cap. 50 STR is the damage soft cap. Core of the build.</td></tr>
+        <tr><td><strong>Remaining points</strong></td><td>SKL 25, ARC 15</td><td>25 SKL boosts visceral attacks and Saw Spear scaling. 15 ARC opens some hunter tools.</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>HP at Key Vitality Levels</h3>
+  <div class="tw">
+    <table>
+      <thead><tr><th>VIT</th><th>Base HP</th><th>With +15% Rune</th><th>With +15% + +10% Runes</th></tr></thead>
+      <tbody>
+        <tr><td>10</td><td class="n">573</td><td class="n">659</td><td class="n">716</td></tr>
+        <tr><td>20</td><td class="n">793</td><td class="n">912</td><td class="n">991</td></tr>
+        <tr><td>30</td><td class="n">1,100</td><td class="n">1,265</td><td class="n good-val">1,375</td></tr>
+        <tr><td>40</td><td class="n">1,216</td><td class="n">1,398</td><td class="n good-val">1,520</td></tr>
+        <tr><td>50</td><td class="n">~1,500</td><td class="n">~1,725</td><td class="n good-val">~1,875</td></tr>
+        <tr><td>99</td><td class="n">~2,000</td><td class="n">~2,300</td><td class="n">~2,500</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>What Not to Level — and Why</h3>
+  <div class="tw">
+    <table>
+      <thead><tr><th>Stat</th><th>Verdict</th><th>Reason</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Endurance past 15</strong></td><td class="hi">Never</td><td>Zero stamina gains from 39–99. Anti-Clockwise Metamorphosis rune (+20% stamina) does more than dozens of END levels for free.</td></tr>
+        <tr><td><strong>Bloodtinge past 7</strong></td><td class="hi">Never</td><td>Only affects your pistol and blood-scaling weapons. 7 is the base minimum, leave it there. The Chikage looks tempting but the HP drain in PvE kills you.</td></tr>
+        <tr><td><strong>Arcane past 15</strong></td><td class="mid">Stop at 15</td><td>15 ARC unlocks some useful hunter tools. Past that, wasted points for a physical build. 25 ARC if you want Logarius' Wheel's buff or more tool options.</td></tr>
+        <tr><td><strong>Skill past 25</strong></td><td class="mid">Stop at 25</td><td>25 SKL is enough for meaningful visceral damage and Saw Spear secondary scaling. Going higher takes points from STR which has a much higher coefficient on the Whirligig.</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>Why 50 STR is the Priority</h3>
+  <p>The Whirligig Saw has a Strength coefficient of <strong>1.10</strong> — the highest of any weapon in the game, tied only with Logarius' Wheel and the Chikage's Bloodtinge. Every point of STR contributes 10% more damage than on a weapon with a 1.0 coefficient. At 50 STR the attribute rating is 0.85, meaning:</p>
+  <p style="text-align:center;font-family:monospace;background:rgba(139,26,26,0.15);padding:10px;margin:12px 0;">Whirligig Phys AR = 190 × (1 + 0.85 × 1.10 + 0.50 × 0.30) = 190 × 2.085 = ~396 base before gems</p>
+  <p>With 3× Adept Blunt gems (32.6% each = 97.8% bonus): <strong>396 × 1.978 = ~783 AR on the spin</strong></p>
+</div>
+
+<!-- ════════════════════════════════════════════
+     GLYPHS
+════════════════════════════════════════════ -->
+<div class="tab" id="tab-glyphs">
+  <h2>Chalice Dungeon Glyphs</h2>
+
+  <h3>What is a Glyph?</h3>
+  <p>A glyph is a code you type into the game that loads another player's pre-made Chalice Dungeon — including their layout, their loot, and their boss drops. This is how the community farms specific gems, weapons, and runes without grinding randomly for hundreds of hours.</p>
+
+  <h3>How to Use a Glyph — Step by Step</h3>
+  <ol class="steps">
+    <li><strong>Go to the Ritual Altar in Hunter's Dream</strong> — the large stone altar at the back of the dream near the gravestones.</li>
+    <li><strong>Make sure you have the right Root Chalice</strong> — each glyph requires a specific type. See the table below. Root Chalices are the reusable ones (e.g. "Pthumeru Root Chalice").</li>
+    <li><strong>Interact with the altar</strong> and select the matching chalice type. Then choose <strong>"Search by Chalice Dungeon Glyph"</strong>.</li>
+    <li><strong>Type the glyph code exactly</strong> as listed. Not case-sensitive.</li>
+    <li><strong>If the glyph requires F/R/C</strong> — purchase Fetid, Rotted, and/or Cursed Offerings from the Bath Messenger and use them when creating the dungeon.</li>
+    <li><strong>Enter the dungeon</strong> from the lamp near the altar. Navigate to the listed location and collect your item or fight the boss for gems.</li>
+  </ol>
+
+  <div class="callout warn">
+    <span class="cl">Requirements</span>
+    PSN connection required — glyphs are online only. Servers are still active as of 2026. You need the matching Root Chalice unlocked first.
+  </div>
+
+  <h3>What Does F / R / C Mean?</h3>
+  <div class="tw">
+    <table>
+      <thead><tr><th>Letter</th><th>Means</th><th>Effect</th><th>Why Use It</th></tr></thead>
+      <tbody>
+        <tr><td><strong>F</strong></td><td>Fetid Offering</td><td>Enemies are stronger</td><td>Required by some glyphs to get the right gem pool</td></tr>
+        <tr><td><strong>R</strong></td><td>Rotted Offering</td><td>More enemies, harder dungeon</td><td>Required by some glyphs</td></tr>
+        <tr><td><strong>C</strong></td><td>Cursed Offering</td><td>Your max HP is cut (sometimes by 50–75%). Gems have a negative secondary effect but a much stronger primary effect.</td><td>In PvE the negative secondary (like "reduces stamina") is usually irrelevant. The stronger primary % is worth it.</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>Which Root Chalice Do I Need?</h3>
+  <div class="tw">
+    <table>
+      <thead><tr><th>Glyph Type</th><th>Root Chalice Needed</th><th>How to Get It</th></tr></thead>
+      <tbody>
+        <tr><td>Pthumeru Root</td><td>Pthumeru Root Chalice</td><td>Available from Bath Messenger after obtaining Pthumeru Chalice (drops from Blood-Starved Beast boss room)</td></tr>
+        <tr><td>Central Pthumeru Root</td><td>Central Pthumeru Root Chalice</td><td>Complete the Pthumeru Chalice dungeon and defeat its boss</td></tr>
+        <tr><td>Lower Pthumeru Root</td><td>Lower Pthumeru Root Chalice</td><td>Complete Central Pthumeru dungeon</td></tr>
+        <tr><td>Pthumeru Ihyll Root</td><td>Pthumeru Ihyll Root Chalice</td><td>Complete all Pthumeru dungeons including the brutal Defiled Chalice</td></tr>
+        <tr><td>Isz Root</td><td>Isz Root Chalice (Gravestone of Isz)</td><td>Dropped by Ebrietas in Upper Cathedral Ward</td></tr>
+        <tr><td>Lower Loran Root</td><td>Lower Loran Root Chalice</td><td>Complete Ailing Loran Chalice (from Amygdala in Nightmare Frontier)</td></tr>
+        <tr><td><strong>False Depth</strong></td><td><strong>Any basic root chalice</strong></td><td>False depth dungeons use low-tier chalices but contain high-level content. Pthumeru Root is enough for most false depth glyphs.</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>What Are "Layers" and "Bonus Rooms"?</h3>
+  <p>Chalice dungeons have multiple <strong>Layers</strong> (floors), each ending in a boss. Within each layer there are two bonus room types beyond the main path:</p>
+  <ul>
+    <li><strong>Pre-lamp bonus room:</strong> A room before the layer's lamp (fast travel point). Requires finding and pulling a lever.</li>
+    <li><strong>Pre-boss bonus room:</strong> A room near the boss fog gate. Usually easier to find.</li>
+  </ul>
+
+  <h3>All Glyphs for This Build — Priority Order</h3>
+  <div class="tw">
+    <table>
+      <thead><tr><th>Priority</th><th>Glyph</th><th>What You Get</th><th>Chalice Needed</th><th>F/R/C</th><th>Location</th></tr></thead>
+      <tbody>
+        <tr>
+          <td class="hi">1 — Urgent</td>
+          <td><span class="g">7hqg2h9a</span></td>
+          <td><strong>Uncanny Saw Spear</strong> (Radial·Radial·Triangle)</td>
+          <td>Central Pthumeru Root</td><td>No</td>
+          <td>Layer 1 first bonus room</td>
+        </tr>
+        <tr>
+          <td class="hi">2 — Urgent</td>
+          <td><span class="g">jgn2jkkw</span></td>
+          <td><strong>Clockwise Metamorphosis Tier 3</strong> (+15% HP)</td>
+          <td>Pthumeru Root (false depth)</td><td>No</td>
+          <td>Layer 1 pre-boss area</td>
+        </tr>
+        <tr>
+          <td class="hi">3 — Urgent</td>
+          <td><span class="g">dgt23fwp</span></td>
+          <td><strong>Anti-Clockwise Meta Tier 3</strong> (+20% Stamina)</td>
+          <td>Pthumeru Root (false depth)</td><td>No</td>
+          <td>Layer 1 pre-lamp area</td>
+        </tr>
+        <tr>
+          <td class="mid">4 — High</td>
+          <td><span class="g">apf4ugyz</span></td>
+          <td><strong>22.3% Tempering Radial gem</strong> (early false depth)</td>
+          <td>Pthumeru Root (false depth)</td><td>No</td>
+          <td>Kill Wandering Madness enemies Layer 1</td>
+        </tr>
+        <tr>
+          <td class="mid">5 — High</td>
+          <td><span class="g">p2tbyrh2</span></td>
+          <td><strong>Eye Tier 3</strong> (+100 Discovery)</td>
+          <td>Pthumeru Root (false depth)</td><td>No</td>
+          <td>Layer 1 pre-lamp area</td>
+        </tr>
+        <tr>
+          <td class="mid">6 — High</td>
+          <td><span class="g">srigzz9m</span></td>
+          <td><strong>Lake Tier 3</strong> (+7% phys damage reduction)</td>
+          <td>Pthumeru Root (false depth)</td><td>No</td>
+          <td>Layer 1 pre-boss area</td>
+        </tr>
+        <tr>
+          <td class="mid">7 — High</td>
+          <td><span class="g">emhiqpp3</span></td>
+          <td><strong>Great Lake Tier 3</strong> (+5% all damage reduction)</td>
+          <td>Pthumeru Root (false depth)</td><td>No</td>
+          <td>Layer 1 pre-lamp area</td>
+        </tr>
+        <tr>
+          <td class="mid">8 — High</td>
+          <td><span class="g">pxmq3t98</span> → <span class="g">bej77ini</span></td>
+          <td><strong>Blood Stone Chunk farming</strong></td>
+          <td>Sinister Pthumeru (buy after glyph 1)</td><td>No</td>
+          <td>Each boss drops chunks. Use Eye runes.</td>
+        </tr>
+        <tr>
+          <td class="mid">9 — High</td>
+          <td><span class="g">aecve32n</span></td>
+          <td><strong>Blood Rock</strong> (L2) + Lost Kirkhammer + Lost Ludwig's</td>
+          <td>Isz Root</td><td>No</td>
+          <td>Layer 1/2 first bonus rooms</td>
+        </tr>
+        <tr>
+          <td class="hi">10 — Endgame</td>
+          <td><span class="g">zkkuat7j</span></td>
+          <td><strong>27.2% Tempering OR 32.6% Adept Blunt Radial</strong></td>
+          <td>Pthumeru Ihyll Root</td><td>F/R/C</td>
+          <td>Layer 1 Merciless Watchers boss</td>
+        </tr>
+        <tr>
+          <td class="hi">11 — Endgame</td>
+          <td><span class="g">zbc6bqes</span></td>
+          <td><strong>27.2% Tempering OR 32.6% Adept Blunt Triangle</strong></td>
+          <td>Isz Root</td><td>F/R/C</td>
+          <td>Layer 1 Merciless Watchers boss</td>
+        </tr>
+        <tr>
+          <td class="lo">Optional</td>
+          <td><span class="g">gz9mmj7y</span></td>
+          <td><strong>Clawmark Tier 3</strong> (+30% visceral attack)</td>
+          <td>Lower Loran Root</td><td>F/R</td>
+          <td>Layer 1 first bonus room</td>
+        </tr>
+        <tr>
+          <td class="lo">Optional</td>
+          <td><span class="g">cummmfpk</span></td>
+          <td><strong>83,000 echo farm</strong> — walk to first hallway, stop before statue on left</td>
+          <td>Pthumeru Root (false depth)</td><td>No</td>
+          <td>Layer 1 first hallway</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════════
+     GEMS
+════════════════════════════════════════════ -->
+<div class="tab" id="tab-gems">
+  <h2>Blood Gems — Best Setup</h2>
+
+  <h3>Understanding Gem Slots</h3>
+  <p>Weapons have up to 3 gem slots — Radial, Triangle, Waning, or Circle. Gems must match the slot shape. Droplet gems fit any slot. The goal is to get the right slot configuration by choosing the right weapon variant (Normal, Uncanny, or Lost).</p>
+  <p>The <strong>Uncanny Saw Spear</strong> (glyph <span class="g">7hqg2h9a</span>) has Radial · Radial · Triangle — perfect for physical builds. The <strong>standard Whirligig Saw</strong> has Radial · Triangle · Waning — fill the Waning with a Droplet or whatever you have.</p>
+
+  <h3>Gem Types Explained</h3>
+  <div class="tw">
+    <table>
+      <thead><tr><th>Gem Type</th><th>What It Boosts</th><th>Use For</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Tempering</strong></td><td>Physical damage only</td><td>Any weapon with pure physical damage</td></tr>
+        <tr><td><strong>Adept (Blunt/Thrust)</strong></td><td>Specific damage sub-type only — higher % than Tempering</td><td>Whirligig Saw transformed spin (Blunt). 32.6% beats 27.2% Tempering on blunt hits.</td></tr>
+        <tr><td><strong>Nourishing</strong></td><td>All damage types at once (physical AND elemental)</td><td>Split-damage weapons: Holy Moonlight Sword, Logarius' Wheel, Tonitrus, Boom Hammer</td></tr>
+        <tr><td><strong>Fool's / Poorman's</strong></td><td>Physical + bonus ATK at full HP / near death</td><td>PvE only. Fool's Tempering (21% + 12% at full HP) effectively outperforms 27.2% Tempering at full HP.</td></tr>
+        <tr><td><strong>Cold Abyssal</strong></td><td>+65 flat Arcane scaling — used for elemental conversion</td><td>Arcane builds converting weapons to Fire/Bolt/Arcane</td></tr>
+        <tr><td><strong>Cursed gems</strong></td><td>Higher primary % but a negative secondary effect</td><td>In PvE the negatives (like "reduces stamina") are usually irrelevant. Use them.</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>Gem Progression — From Early to Endgame</h3>
+  <div class="tw">
+    <table>
+      <thead><tr><th>Stage</th><th>Use These</th><th>How to Get</th><th>Power</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Before chalice access</strong></td><td>Whatever drops from enemies</td><td>Normal game loot</td><td class="n lo">~5–10%</td></tr>
+        <tr><td><strong>First false depth dungeon</strong></td><td>22.3% Tempering Radial × 2</td><td>Glyph <span class="g">apf4ugyz</span> — kill Wandering Madness enemies Layer 1</td><td class="n mid">~22%</td></tr>
+        <tr><td><strong>Mid game false depth</strong></td><td>25% Tempering Radial + Triangle</td><td>Glyphs <span class="g">rz2xju5h</span> (Radial) and <span class="g">258eatgn</span> (Triangle)</td><td class="n mid">~25%</td></tr>
+        <tr><td><strong>Endgame — best gems</strong></td><td>27.2% Tempering × 3 OR 32.6% Adept Blunt × 3</td><td>Glyphs <span class="g">zkkuat7j</span> (Radial) and <span class="g">zbc6bqes</span> (Triangle) — FRC dungeons</td><td class="n good-val">27–33%</td></tr>
+        <tr><td><strong>PvE pure (Fool's)</strong></td><td>21% Phys + 12% ATK at full HP</td><td>Glyph <span class="g">s9k4dqvz</span> — Labyrinth Madman, FRC Ihyll L1</td><td class="n good-val">~33% at full HP</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="callout good">
+    <span class="cl">Final Setup — Whirligig Saw</span>
+    <strong>If you primarily use the transformed spin:</strong> 2× 32.6% Adept Blunt Radial + 1× 32.6% Adept Blunt Triangle. Same farm glyphs as Tempering — Merciless Watchers drops both. The spin deals Blunt damage, so Adept Blunt (32.6%) beats Tempering (27.2%) on every spin tick.<br><br>
+    <strong>If you use both modes equally:</strong> 2× 27.2% Tempering Radial + 1× 27.2% Tempering Triangle. Tempering boosts all physical hits, Adept Blunt only boosts blunt hits.<br><br>
+    <strong>PvE-only (best overall):</strong> 2× Fool's Tempering Radial + 1× Fool's Tempering Waning. Effectively ~33% at full HP which you'll maintain thanks to the Moon rune restoring HP on kills.
+  </div>
+
+  <h3>Endgame Gem Farm — Step by Step</h3>
+  <p><strong>For the Merciless Watchers farm (best gems in the game):</strong></p>
+  <ol class="steps">
+    <li><strong>Unlock Pthumeru Ihyll Root Chalice</strong> — requires completing all Pthumeru dungeons through the Defiled Chalice (the one that cuts your HP by 50%). This is the hardest gate in the game.</li>
+    <li><strong>Enter glyph <span class="g">zkkuat7j</span></strong> — F/R/C Pthumeru Ihyll Root required. Layer 1 Merciless Watchers boss drops 27.2% Tempering Radial and 32.6% Adept Radial gems.</li>
+    <li><strong>Enter glyph <span class="g">zbc6bqes</span></strong> — F/R/C Isz Root required. Same boss type drops the Triangle version.</li>
+    <li><strong>Equip Eye runes</strong> (+100 Discovery) to increase gem drop rates.</li>
+    <li><strong>Kill the boss, check drops, quit to menu, re-enter.</strong> Repeat until you have 3 gems with acceptable secondary effects. Cursed secondaries are fine in PvE.</li>
+  </ol>
+</div>
+
+<!-- ════════════════════════════════════════════
+     RUNES
+════════════════════════════════════════════ -->
+<div class="tab" id="tab-runes">
+  <h2>Runes — Best Setup & How to Get Them</h2>
+
+  <div class="callout info">
+    <span class="cl">Unlock Requirement</span>
+    You cannot equip runes until you obtain the <strong>Rune Workshop Tool</strong> — dropped by defeating the <strong>Witch of Hemwick</strong> in Hemwick Charnel Lane (accessible from Cathedral Ward after Blood-Starved Beast). Once you have it, go to the Memory Altar in Hunter's Dream to equip runes.
+  </div>
+
+  <h3>Final Rune Setup</h3>
+  <div class="tw">
+    <table>
+      <thead><tr><th>Slot</th><th>Rune</th><th>Effect</th><th>Where to Get</th></tr></thead>
+      <tbody>
+        <tr>
+          <td>1</td>
+          <td><strong>Moon (+10%)</strong></td>
+          <td>Restores HP when you kill enemies. With the Moon rune equipped every kill tops up your health — essentially permanent sustain through any multi-enemy area.</td>
+          <td>In <strong>Hypogean Gaol</strong> — the prison area you reach by letting a Snatcher enemy grab and carry you in Yahar'gul / Cathedral Ward at night. The Moon rune is on a corpse in one of the cells. You can get this very early.</td>
+        </tr>
+        <tr>
+          <td>2</td>
+          <td><strong>Clockwise Meta Tier 3 (+15% HP)</strong></td>
+          <td>Max HP +15%. At 50 VIT this is ~225 extra HP.</td>
+          <td>Glyph <span class="g">jgn2jkkw</span> — false depth Pthumeru Root, Layer 1 pre-boss area. Get this as soon as you have chalice access.</td>
+        </tr>
+        <tr>
+          <td>3</td>
+          <td><strong>Clockwise Meta Tier 2 (+10% HP)</strong></td>
+          <td>Max HP +10%.</td>
+          <td>Natural pickup in <strong>Nightmare Frontier</strong> — go left from the lamp early in the area, it's on a ledge. This is a free in-game pickup, no chalice needed.</td>
+        </tr>
+        <tr>
+          <td>4</td>
+          <td><strong>Lake Tier 3 (+7% Phys DR)</strong></td>
+          <td>All physical damage taken reduced by 7%.</td>
+          <td>Glyph <span class="g">srigzz9m</span> — false depth, Layer 1 pre-boss. Lake Tier 1 (+3%) is also a free pickup in Hemwick Charnel Lane.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>Rune Progression — Early to Final</h3>
+  <div class="tw">
+    <table>
+      <thead><tr><th>When</th><th>Use These</th><th>Source</th></tr></thead>
+      <tbody>
+        <tr><td>After Witch of Hemwick</td><td>Lake +3% + whatever you have</td><td>Hemwick Charnel Lane — natural pickup near the boss</td></tr>
+        <tr><td>After Nightmare Frontier</td><td>Clockwise Meta +10% (Tier 2) + Lake</td><td>Nightmare Frontier — natural loot on left side from lamp</td></tr>
+        <tr><td>After chalice dungeon access</td><td>Clockwise +15% + Anti-CW +20% Stamina + Lake + Moon</td><td>Glyphs <span class="g">jgn2jkkw</span>, <span class="g">dgt23fwp</span> + Hypogean Gaol</td></tr>
+        <tr><td>Final setup</td><td>Moon + Clockwise +15% + Clockwise +10% + Lake +7%</td><td>All sources above + glyph <span class="g">srigzz9m</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>Other Useful Runes</h3>
+  <div class="tw">
+    <table>
+      <thead><tr><th>Rune</th><th>Effect</th><th>When Useful</th><th>Source</th></tr></thead>
+      <tbody>
+        <tr><td>Anti-CW Meta Tier 3</td><td>+20% Stamina</td><td>Early/mid game before you're comfortable with stamina. Replace with Lake once you don't need the stamina boost.</td><td>Glyph <span class="g">dgt23fwp</span></td></tr>
+        <tr><td>Clawmark Tier 3</td><td>+30% Visceral Attack damage</td><td>If you parry often — makes viscerals deal enormous damage</td><td>Glyph <span class="g">gz9mmj7y</span></td></tr>
+        <tr><td>Communion +5</td><td>+5 max Blood Vials (carry 25)</td><td>Hard boss runs where you burn through heals</td><td>Glyph <span class="g">pd5scth3</span></td></tr>
+        <tr><td>Eye Tier 3</td><td>+100 Item Discovery</td><td>Gem and item farming runs</td><td>Glyph <span class="g">p2tbyrh2</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════════
+     BOSSES
+════════════════════════════════════════════ -->
+<div class="tab" id="tab-bosses">
+  <h2>Boss Guide — Weaknesses & Strategy</h2>
+  <p>Defense values: <strong class="boss-weak">lower = weaker</strong>. A value of 50 means roughly double damage compared to 100. <strong class="boss-immune">Red values</strong> = effectively immune, never use that damage type.</p>
+  <p>For full walkthroughs use <a href="https://modo-lv.github.io/bloodborne-checklist/" target="_blank">modo-lv's checklist</a>. This table tells you what weapon to use and the most important thing to know.</p>
+
+  <div class="tw">
+    <table>
+      <thead>
+        <tr>
+          <th>Boss</th><th>Phys</th><th>Blunt</th><th>Thrust</th><th>Fire</th><th>Bolt</th><th>Arc</th>
+          <th>Use This Build's Tool</th><th>Key Tip</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Cleric Beast</strong></td>
+          <td class="n">103</td><td class="n">123</td><td class="n">103</td>
+          <td class="n boss-weak">50</td><td class="n">165</td><td class="n">165</td>
+          <td>Molotovs + Fire Paper on Saw Spear</td>
+          <td>Optional boss. Serrated Saw Spear + fire paper = very fast kill. Weak to fire.</td>
+        </tr>
+        <tr>
+          <td><strong>Father Gascoigne</strong></td>
+          <td class="n">95</td><td class="n">95</td><td class="n">95</td>
+          <td class="n boss-weak">65</td><td class="n">120</td><td class="n">80</td>
+          <td>Saw Spear + Hunter Pistol parries</td>
+          <td>Use the Tiny Music Box item (from Viola's daughter) in phase 2 to stagger him for a free visceral.</td>
+        </tr>
+        <tr>
+          <td><strong>Blood-Starved Beast</strong></td>
+          <td class="n">108</td><td class="n">108</td><td class="n">108</td>
+          <td class="n boss-weak">55</td><td class="n">160</td><td class="n">55</td>
+          <td>Holy Water Urns + Fire Paper + Molotovs</td>
+          <td>Holy Water Urns (buy from Bath Messenger after visiting Iosefka's clinic) are extremely effective here. Throw 3 Molotovs at the start.</td>
+        </tr>
+        <tr>
+          <td><strong>Witch of Hemwick</strong></td>
+          <td class="n">79</td><td class="n">79</td><td class="n">79</td>
+          <td class="n">73</td><td class="n">90</td><td class="n">70</td>
+          <td>Saw Spear spam</td>
+          <td>Easy boss. Kill the Madmen she spawns to see her. Defeating her gives you the Rune Workshop Tool — equip your runes immediately after.</td>
+        </tr>
+        <tr>
+          <td><strong>Darkbeast Paarl</strong></td>
+          <td class="n">120</td><td class="n">144</td><td class="n">120</td>
+          <td class="n">85</td><td class="n boss-immune">300</td><td class="n">75</td>
+          <td>Saw Spear / Whirligig — anything physical</td>
+          <td>Completely immune to bolt — do not use Tonitrus. Stay under its body and attack the legs. Topples easily and stays down for a long punish window.</td>
+        </tr>
+        <tr>
+          <td><strong>Vicar Amelia</strong></td>
+          <td class="n">113</td><td class="n">135</td><td class="n">113</td>
+          <td class="n boss-weak">55</td><td class="n">160</td><td class="n">160</td>
+          <td>Fire Paper on Saw Spear + Molotovs</td>
+          <td>Interrupt her healing grab with your gun. Serrated + fire = very efficient. Use the gold pendant gesture at the altar after defeating her to progress the story.</td>
+        </tr>
+        <tr>
+          <td><strong>Shadow of Yharnam</strong></td>
+          <td class="n">89</td><td class="n">89</td><td class="n">89</td>
+          <td class="n">90</td><td class="n boss-weak">68</td><td class="n boss-weak">60</td>
+          <td>Saw Spear — kill Candle one first</td>
+          <td>Priority: Candle (weakest) → Mace → Snake. Kill the Snake last — it summons more snakes at low HP. The Mace one has high blood defense so avoid blood gems here.</td>
+        </tr>
+        <tr>
+          <td><strong>Amygdala</strong></td>
+          <td class="n">128</td><td class="n">153</td><td class="n">128</td>
+          <td class="n boss-weak">70</td><td class="n boss-weak">70</td><td class="n boss-weak">70</td>
+          <td>Saw Spear / Whirligig — aim at the head</td>
+          <td>Head hitbox takes 3× damage. When it leans down for attacks, run under its arms and hit the head with R2 or jump attacks. All elements are equally weak (70).</td>
+        </tr>
+        <tr>
+          <td><strong>Martyr Logarius</strong></td>
+          <td class="n">133</td><td class="n">133</td><td class="n">133</td>
+          <td class="n">160</td><td class="n">180</td><td class="n">290</td>
+          <td>Whirligig / Saw Spear — stay aggressive</td>
+          <td>Aggression interrupts his phase 2 spell casting. Destroy his staff in phase 1 by hitting it. High arcane resistance — never use arcane tools here.</td>
+        </tr>
+        <tr>
+          <td><strong>Rom, the Vacuous Spider</strong></td>
+          <td class="n">130</td><td class="n">130</td><td class="n">130</td>
+          <td class="n">72</td><td class="n boss-weak">45</td><td class="n">80</td>
+          <td><strong>Tonitrus</strong> if you have it, otherwise Saw Spear</td>
+          <td>Bolt DEF of 45 = roughly 3× damage vs physical. Tonitrus here is the single biggest elemental matchup in the game. Run past the small spiders every time and focus only on Rom.</td>
+        </tr>
+        <tr>
+          <td><strong>The One Reborn</strong></td>
+          <td class="n">135</td><td class="n">162</td><td class="n">135</td>
+          <td class="n boss-weak">70</td><td class="n boss-weak">40</td><td class="n">290</td>
+          <td>Tonitrus or Whirligig Saw spin</td>
+          <td>Bolt DEF 40 — even weaker to bolt than Rom. Kill chanters on balconies if needed. Whirligig spin on its core body is also highly effective.</td>
+        </tr>
+        <tr>
+          <td><strong>Celestial Emissary</strong></td>
+          <td class="n">235</td><td class="n">261</td><td class="n boss-weak">26</td><td class="n boss-weak">60</td><td class="n boss-weak">55</td><td class="n">170</td>
+          <td>Saw Spear transformed thrust R1s</td>
+          <td>Thrust DEF of 26 — extraordinarily weak to thrust. Saw Spear transformed R1s deal absurd damage here. The big glowing one is the real boss — kill the small ones to reveal it.</td>
+        </tr>
+        <tr>
+          <td><strong>Ebrietas</strong></td>
+          <td class="n">252</td><td class="n">336</td><td class="n boss-weak">101</td><td class="n boss-weak">60</td><td class="n boss-weak">55</td><td class="n">170</td>
+          <td>Saw Spear transformed thrust R1s</td>
+          <td>Stay under her chin and spam Saw Spear transformed thrust attacks. Charge her at the start of the fight to avoid the opening arcane blast. Very high physical/blunt defense — never use the Whirligig spin here, it deals Blunt which this boss resists heavily (336).</td>
+        </tr>
+        <tr>
+          <td><strong>Micolash</strong></td>
+          <td class="n">169</td><td class="n">134</td><td class="n">125</td>
+          <td class="n">124</td><td class="n">125</td><td class="n">232</td>
+          <td>Saw Spear fast R1s after cornering him</td>
+          <td>Chase him into dead ends to corner him. His arcane screams are lethal — dodge them. He's extremely fragile once trapped. Never use arcane tools — very high arc resistance.</td>
+        </tr>
+        <tr>
+          <td><strong>Mergo's Wet Nurse</strong></td>
+          <td class="n">148</td><td class="n">177</td><td class="n">148</td>
+          <td class="n">75</td><td class="n">75</td><td class="n">75</td>
+          <td>Whirligig Saw spin during her openings</td>
+          <td>During the dark phase with copies, stay on the original (faint red eye). Her scythe openings are long — this is a prime spin window. All elements equally weak (75).</td>
+        </tr>
+        <tr>
+          <td><strong>Gehrman</strong></td>
+          <td class="n">150</td><td class="n">150</td><td class="n">150</td>
+          <td class="n boss-weak">70</td><td class="n boss-weak">65</td><td class="n boss-weak">65</td>
+          <td>Whirligig + Hunter Pistol parries</td>
+          <td>His attacks are very parry-friendly — listen for his grunt/swipe sounds to time your gun. His scythe sweeps have a generous window. Parry → visceral → repeat is the fastest strategy.</td>
+        </tr>
+        <tr>
+          <td><strong>Moon Presence</strong></td>
+          <td class="n">137</td><td class="n">137</td><td class="n">137</td>
+          <td class="n">75</td><td class="n">75</td><td class="n">75</td>
+          <td>Whirligig Saw spin</td>
+          <td>Consume 3× One Third of Umbilical Cord before fighting Gehrman to access this. Its screen-wide frenzy attack is avoided by staying close to it. Surprisingly manageable — your fully upgraded Whirligig ends this fight quickly.</td>
+        </tr>
+        <tr style="background:rgba(139,26,26,0.08);">
+          <td colspan="9" style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:0.25em;text-transform:uppercase;color:var(--gold-dim);padding:8px 11px;">The Old Hunters DLC</td>
+        </tr>
+        <tr>
+          <td><strong>Ludwig</strong></td>
+          <td class="n">140</td><td class="n">140</td><td class="n">140</td>
+          <td class="n boss-weak">98</td><td class="n">126</td><td class="n">126</td>
+          <td>Whirligig spin during phase 1 openings</td>
+          <td>Phase 1: stay near his left flank, punish after swipes. Phase 2: his charged sword slams are interruptable with your gun. When he rears up, dodge forward through the attack — don't back away.</td>
+        </tr>
+        <tr>
+          <td><strong>Laurence</strong></td>
+          <td class="n">148</td><td class="n">178</td><td class="n">148</td>
+          <td class="n boss-immune">744</td><td class="n">200</td><td class="n">200</td>
+          <td>Whirligig / Saw Spear — physical only</td>
+          <td><strong>Completely immune to fire (744 DEF).</strong> Never use fire here. In phase 2 when he loses his legs, stay directly behind him constantly. The Whirligig spin while staying at his rear ends this fight cleanly.</td>
+        </tr>
+        <tr>
+          <td><strong>Living Failures</strong></td>
+          <td class="n">239</td><td class="n">273</td><td class="n boss-weak">102</td>
+          <td class="n boss-weak">92</td><td class="n boss-weak">71</td><td class="n">256</td>
+          <td>Saw Spear transformed thrust R1s</td>
+          <td>Thrust DEF of 102 — very weak. Kill them one at a time. The Whirligig's Blunt (273 DEF) is actually one of its worst matchups in the whole game. Use the Saw Spear here.</td>
+        </tr>
+        <tr>
+          <td><strong>Lady Maria</strong></td>
+          <td class="n">147</td><td class="n">147</td><td class="n">147</td>
+          <td class="n">177</td><td class="n">103</td><td class="n">103</td>
+          <td>Whirligig / Saw Spear — stay aggressive</td>
+          <td>She heals using blood in later phases — backing away lets her recover. Constant pressure is the strategy. Parry is effective in phase 1. Never use fire — very high fire resistance.</td>
+        </tr>
+        <tr>
+          <td><strong>Orphan of Kos</strong></td>
+          <td class="n">183</td><td class="n">183</td><td class="n">183</td>
+          <td class="n">205</td><td class="n">228</td><td class="n">274</td>
+          <td>Saw Spear R1 then dodge — no sustained openings</td>
+          <td>Hardest boss in the game. No elemental weakness — pure physical. Dodge through his attacks rather than away from them. Phase 2 aerial slam: he goes to the water's edge to signal it. One hit and dodge is the correct rhythm here — don't try to spin.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="callout warn">
+    <span class="cl">The Defiled Chalice — Required for Best Gems</span>
+    To access Pthumeru Ihyll Root Chalice (needed for glyphs <span class="g">zkkuat7j</span> and <span class="g">zbc6bqes</span>), you must complete the <strong>Pthumerian Defilement</strong> dungeon — which cuts your max HP by 50%. Two bosses: Defiled Watchdog (fire IMMUNE — physical only, its attacks one-shot) and Defiled Amygdala (aim at the head for 3× damage). Be at 50 VIT and +9 weapon before attempting. See <a href="https://www.reddit.com/r/bloodborne/comments/ci67nz/a_simple_guide_to_beating_defiled_amygdala/" target="_blank">this guide</a> for Defiled Amygdala specifically.
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════════
+     WHY THIS BUILD
+════════════════════════════════════════════ -->
+<div class="tab" id="tab-why">
+  <h2>Why This Build — The Analysis</h2>
+
+  <p>This recommendation is based on community data from AR calculators, damage spreadsheets, boss defense tables, moveset multiplier data, and scaling coefficient tables — all cross-referenced against each other. Here's the honest picture.</p>
+
+  <h3>What the Numbers Actually Show</h3>
+
+  <div class="tw">
+    <table>
+      <thead><tr><th>Build</th><th>Avg Hit vs Bosses</th><th>Spin DPS</th><th>Survivability</th><th>Versatility</th><th>Overall</th></tr></thead>
+      <tbody>
+        <tr><td><strong>STR / Whirligig Saw</strong></td><td class="n mid">~672</td><td class="n hi">~2,400/sec</td><td class="n good-val">★★★★★</td><td class="n good-val">★★★★</td><td class="n hi">Best</td></tr>
+        <tr><td><strong>Quality / Ludwig's HB</strong></td><td class="n good-val">~733</td><td class="n mid">~660/sec</td><td class="n good-val">★★★★</td><td class="n good-val">★★★★★</td><td class="n mid">2nd</td></tr>
+        <tr><td><strong>BLT / Chikage</strong></td><td class="n good-val">~760</td><td class="n mid">~700/sec</td><td class="n mid">★★</td><td class="n mid">★★</td><td class="n mid">3rd</td></tr>
+        <tr><td><strong>Arc / HMS Nourishing</strong></td><td class="n mid">~657</td><td class="n mid">~600/sec</td><td class="n good-val">★★★★</td><td class="n good-val">★★★★</td><td class="n mid">3rd</td></tr>
+        <tr><td><strong>Skill / Rakuyo</strong></td><td class="n lo">~471</td><td class="n lo">~500/sec</td><td class="n good-val">★★★★</td><td class="n mid">★★★</td><td class="n lo">4th</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>The Key Insight — Why Per-Hit AR Isn't Everything</h3>
+  <p>The Chikage and Ludwig's Holy Blade deal more damage per single hit. But "best PvE build" is not the same as "highest single hit." What matters is <strong>total damage dealt in a boss fight</strong>, and that depends on:</p>
+  <ul>
+    <li><strong>How many hits you can land per second</strong> — the Whirligig spin lands 3.5 hits/second vs ~0.9 for a greatsword R1 chain</li>
+    <li><strong>Whether you stay alive long enough</strong> — the Chikage drains your own HP in transformed mode, Chikage has poor rally, and the Whirligig's spin restores rally HP on every tick</li>
+    <li><strong>Whether the weapon works on every enemy</strong> — physical Blunt works on everything; elemental builds require switching and setup</li>
+  </ul>
+
+  <h3>When You Can Only Land One Hit Before Dodging</h3>
+  <p>You correctly identified this — many bosses (Orphan of Kos, Lady Maria, Gascoigne) give tiny windows. In those situations, single-hit damage matters more and the Whirligig's advantage narrows. The honest answer for those fights:</p>
+  <ul>
+    <li><strong>Use Saw Spear R1</strong> — faster recovery than Whirligig, lets you dodge sooner</li>
+    <li><strong>Don't try to spin</strong> — the spin is a reward for reading the boss, not a default</li>
+    <li><strong>The Whirligig still isn't wrong</strong> — its single R1 damage is competitive, and when an opening appears you can briefly spin before dodging</li>
+  </ul>
+
+  <h3>Why Not Arcane?</h3>
+  <p>Arcane is situationally stronger — the right element on the right boss can deal roughly double damage. Rom with a Tonitrus (bolt, DEF 45) deals far more per hit than the Whirligig. But:</p>
+  <ul>
+    <li>You need to carry multiple weapons and switch between fights</li>
+    <li>If you pick the wrong element or the boss resists it, you're doing less damage than physical</li>
+    <li>The spin's DPS advantage compensates for neutral elemental matchups on most bosses</li>
+    <li>Physical Strength builds work against everything with zero preparation</li>
+  </ul>
+  <p>Arcane is the best <em>second playthrough</em> build when you know every boss's weakness in advance. For a first playthrough, Strength/Whirligig is the right answer.</p>
+
+  <h3>Why Not Chikage/Bloodtinge?</h3>
+  <p>The Chikage has higher single-hit AR on paper and scored best in the raw damage analysis. But in a real PvE boss fight:</p>
+  <ul>
+    <li><strong>It drains your HP in transformed mode</strong> — the mode where all the damage comes from. In a 2-minute boss fight you can lose 30–40% of your HP to your own weapon.</li>
+    <li><strong>Poor rally</strong> — you can't recover the HP your weapon drains by hitting the boss. The Whirligig spin restores rally on every tick.</li>
+    <li><strong>50 Bloodtinge helps nothing else</strong> — every other build's primary stat buffs multiple weapons. Bloodtinge is almost exclusively for the Chikage and Bloodletter.</li>
+    <li><strong>Blood damage is often resisted</strong> — many bosses have higher blood defense than physical defense.</li>
+  </ul>
+  <p>High damage output that kills you in the process is not a good PvE build. The Whirligig wins on <strong>total net damage output while staying alive</strong>.</p>
+
+  <div class="callout good">
+    <span class="cl">Final Verdict</span>
+    The Strength/Whirligig Saw build wins in PvE because it combines very high sustained DPS, the best stagger in the game, the best rally in the game, strong survivability, and works on everything without preparation. No other build scores highly across all five categories simultaneously. Use the Saw Spear alongside it for aggressive bosses and specific elemental situations — together they cover every encounter in the game.
+  </div>
+</div>
+
+<footer>Bloodborne Best PvE Build · Community Data Synthesis · v3.0</footer>
+</div>
+
+<script>
+function show(id, btn) {
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('tab-' + id).classList.add('active');
+  btn.classList.add('active');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+</script>
+</body>
+</html>
